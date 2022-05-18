@@ -1,0 +1,39 @@
+apply plugin: 'java-library'
+apply plugin: 'groovy' //必须
+//apply plugin: 'maven-publish'
+
+apply plugin: 'com.github.dcendents.android-maven' // 添加这个
+group='com.github.hyhyhykw'	// 指定group，com.github.<用户名>
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+repositories {
+    mavenCentral()
+    google()
+}
+
+dependencies {
+    implementation gradleApi() //必须
+    implementation localGroovy() //必须
+
+    implementation 'com.android.tools.build:gradle:4.2.2'
+    implementation 'com.android.tools.build:gradle-api:4.2.2'
+}
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+//将src文件夹中的资源文件同时打包
+processResources {
+    from('src/main'){
+        include '**/*.zip'
+    }
+}
+
+task sourceJar(type: Jar) {
+    from(sourceSets.main.java.srcDirs, sourceSets.main.groovy.srcDirs)
+    classifier "sources" //定义一个标志 (生成的jar包后面加上sources, 如: jlib-2.2.11-sources.jar)
+}

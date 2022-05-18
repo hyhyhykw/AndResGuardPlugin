@@ -1,3 +1,4 @@
 rootProject.name = "AndResGuard"
 include ':app'
 include ':guard'
+include ':library'

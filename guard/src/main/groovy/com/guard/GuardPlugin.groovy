@@ -21,7 +21,7 @@ class GuardPlugin implements Plugin<Project> {
         //通过正则表达式获取判断是否为打包任务
         //没有渠道包时 assembleRelease 就是打包任务
         //有渠道时 assemble渠道名称首字母大写Release 就是打包任务
-        Pattern pattern = Pattern.compile("assemble(|[A-Z][a-z]*)Release")
+        Pattern pattern = Pattern.compile("assemble(|[A-Z0-9][a-zA-Z0-9]*)Release")
         //获取系统名称 判断是windows还是mac linux暂时不用
         def sys = System.getProperty("os.name").toLowerCase()
         //整个项目的目录
